@@ -46,4 +46,4 @@ for(var i = 0; i < regions.features.length; i++) {
 }
 }
 
-load();
+load(point);
