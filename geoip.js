@@ -1,12 +1,17 @@
-var long = 10
-var lat = 20
-
 // Call GeoIP URL from user's location
 $.get("http://freegeoip.net/json", function(response) {
     //if your site is using SSL then use https instead of http
-    long = response.longitude;
-    lat = response.latitude;
-    console.log(long, lat);
+    // long = response.longitude;
+    // lat = response.latitude;
+    // console.log(long, lat);
+    var point = {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [response.longitude, response.latitude]
+      }
+    };
 }, "jsonp");
 
 // Another GeoIP service
@@ -15,19 +20,10 @@ $.get("http://freegeoip.net/json", function(response) {
 //     console.log(response.loc);
 // }, "jsonp");
 
-// Create point json from geoip long/lat
-var point = {
-  "type": "Feature",
-  "properties": {},
-  "geometry": {
-    "type": "Point",
-    "coordinates": [long, lat]
-  }
-};
-
 // var myregions = JSON.parse(regions);
 
 // Loop through qld region dataset to find where latitude/longitude are within
+function load(point) {
 for(var i = 0; i < regions.features.length; i++) {
     regions.features[i].properties = {};
     regions.features[i].bbox = turf.bbox(regions.features[i]);
@@ -40,9 +36,12 @@ for(var i = 0; i < regions.features.length; i++) {
             turf.inside(point.features[j],regions.features[i])) {
             // Don't think this part is needed ??
             // regions.features[i].properties.point++;
-            result = "Queensland";
+            // result = "Queensland";
+            console.log("Queensland");
         } else {
-            result = regions[0].ID;
+            // result = regions[0].ID;
+            console.log(regions[0].ID);
         }
     }
+}
 }
