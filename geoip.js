@@ -36,11 +36,11 @@ for(var i = 0; i < regions.features.length; i++) {
             turf.inside(point.features[j],regions.features[i])) {
             // Don't think this part is needed ??
             // regions.features[i].properties.point++;
-            // result = "Queensland";
-            console.log("Queensland");
+            result = "Queensland";
+            // console.log("Queensland");
         } else {
-            // result = regions[0].ID;
-            console.log(regions[0].ID);
+            result = regions[0].ID;
+            // console.log(regions[0].ID);
         }
     }
 }
